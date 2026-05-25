@@ -1,0 +1,998 @@
+[
+  {
+    "id": "1",
+    "name": "Turntables"
+  },
+  {
+    "id": "2",
+    "name": "Speakers"
+  },
+  {
+    "id": "3",
+    "name": "Amplifiers"
+  },
+  {
+    "id": "4",
+    "name": "Preamplifiers"
+  },
+  {
+    "id": "5",
+    "name": "Accessories"
+  },
+  {
+    "id": "6",
+    "name": "Cartridges"
+  },
+  {
+    "id": "7",
+    "name": "Phono Preamps"
+  },
+  {
+    "id": "8",
+    "name": "CD Players / DAC\\"
+  },
+  {
+    "id": "9",
+    "name": "Tonearms"
+  },
+  {
+    "id": "11",
+    "name": "Headphones / HP Amps"
+  },
+  {
+    "id": "12",
+    "name": "Integrated / Rec\\"
+  },
+  {
+    "id": "13",
+    "name": "Used/Demo"
+  },
+  {
+    "id": "14",
+    "name": "Cables"
+  },
+  {
+    "id": "15",
+    "name": "Subs"
+  },
+  {
+    "id": "18",
+    "name": "Customers Systems"
+  },
+  {
+    "id": "19",
+    "name": "Stands / Isolation"
+  },
+  {
+    "id": "20",
+    "name": "Power Conditioning"
+  },
+  {
+    "id": "21",
+    "name": "Music Streaming / DAC"
+  },
+  {
+    "id": "22",
+    "name": "Clearaudio"
+  },
+  {
+    "id": "23",
+    "name": "VPI"
+  },
+  {
+    "id": "24",
+    "name": "Oracle Audio"
+  },
+  {
+    "id": "25",
+    "name": "Rega"
+  },
+  {
+    "id": "30",
+    "name": "Music Hall"
+  },
+  {
+    "id": "402",
+    "name": "SolidSteel"
+  },
+  {
+    "id": "35",
+    "name": "Rega"
+  },
+  {
+    "id": "37",
+    "name": "NAIM"
+  },
+  {
+    "id": "404",
+    "name": "Luxman"
+  },
+  {
+    "id": "44",
+    "name": "Naim"
+  },
+  {
+    "id": "46",
+    "name": "Rega"
+  },
+  {
+    "id": "423",
+    "name": "Focal"
+  },
+  {
+    "id": "53",
+    "name": "Naim"
+  },
+  {
+    "id": "54",
+    "name": "EAR / Yoshino"
+  },
+  {
+    "id": "406",
+    "name": "Modile Fidelity"
+  },
+  {
+    "id": "56",
+    "name": "Rega"
+  },
+  {
+    "id": "253",
+    "name": " Music Hall"
+  },
+  {
+    "id": "70",
+    "name": "Rega"
+  },
+  {
+    "id": "71",
+    "name": "Naim"
+  },
+  {
+    "id": "73",
+    "name": "Clearaudio"
+  },
+  {
+    "id": "77",
+    "name": "Oracle Audio"
+  },
+  {
+    "id": "78",
+    "name": "Milty"
+  },
+  {
+    "id": "79",
+    "name": "Dr. Feickert"
+  },
+  {
+    "id": "412",
+    "name": "Origin Live"
+  },
+  {
+    "id": "84",
+    "name": "Ortofon"
+  },
+  {
+    "id": "86",
+    "name": "Soundsmith"
+  },
+  {
+    "id": "88",
+    "name": "Nordost"
+  },
+  {
+    "id": "90",
+    "name": "Dynavector"
+  },
+  {
+    "id": "91",
+    "name": "Rega"
+  },
+  {
+    "id": "92",
+    "name": "Benz"
+  },
+  {
+    "id": "93",
+    "name": "Clearaudio"
+  },
+  {
+    "id": "95",
+    "name": "Grado"
+  },
+  {
+    "id": "97",
+    "name": "Oracle"
+  },
+  {
+    "id": "99",
+    "name": "Soundsmith"
+  },
+  {
+    "id": "100",
+    "name": "Ortofon"
+  },
+  {
+    "id": "101",
+    "name": "Sumiko"
+  },
+  {
+    "id": "102",
+    "name": "Shure"
+  },
+  {
+    "id": "103",
+    "name": "EAR / Yoshino"
+  },
+  {
+    "id": "104",
+    "name": "Rega"
+  },
+  {
+    "id": "105",
+    "name": "Naim"
+  },
+  {
+    "id": "108",
+    "name": "Dynavector"
+  },
+  {
+    "id": "109",
+    "name": "Grado"
+  },
+  {
+    "id": "111",
+    "name": "Benz Micro"
+  },
+  {
+    "id": "112",
+    "name": "Clearaudio"
+  },
+  {
+    "id": "407",
+    "name": "Oracle Audio"
+  },
+  {
+    "id": "118",
+    "name": "PS Audio"
+  },
+  {
+    "id": "120",
+    "name": "Soundsmith"
+  },
+  {
+    "id": "121",
+    "name": "Ortofon"
+  },
+  {
+    "id": "125",
+    "name": "Naim"
+  },
+  {
+    "id": "127",
+    "name": "Rega"
+  },
+  {
+    "id": "254",
+    "name": "Music Hall"
+  },
+  {
+    "id": "133",
+    "name": "Music Hall"
+  },
+  {
+    "id": "134",
+    "name": "PS Audio"
+  },
+  {
+    "id": "136",
+    "name": "Naim"
+  },
+  {
+    "id": "137",
+    "name": "Rega"
+  },
+  {
+    "id": "138",
+    "name": "Clearaudio"
+  },
+  {
+    "id": "139",
+    "name": "Oracle / SME"
+  },
+  {
+    "id": "140",
+    "name": "Dynavector"
+  },
+  {
+    "id": "141",
+    "name": "Graham"
+  },
+  {
+    "id": "144",
+    "name": "Tri-Planar"
+  },
+  {
+    "id": "472",
+    "name": "Wattson Audio"
+  },
+  {
+    "id": "433",
+    "name": "Reed "
+  },
+  {
+    "id": "154",
+    "name": "Grado"
+  },
+  {
+    "id": "155",
+    "name": "Headphone Amps"
+  },
+  {
+    "id": "157",
+    "name": "Naim"
+  },
+  {
+    "id": "159",
+    "name": "Rega"
+  },
+  {
+    "id": "419",
+    "name": "EAR "
+  },
+  {
+    "id": "161",
+    "name": "Magnum Dynalab"
+  },
+  {
+    "id": "167",
+    "name": "Music Hall"
+  },
+  {
+    "id": "170",
+    "name": "Used"
+  },
+  {
+    "id": "171",
+    "name": "Demo"
+  },
+  {
+    "id": "172",
+    "name": "Grado"
+  },
+  {
+    "id": "173",
+    "name": "Naim"
+  },
+  {
+    "id": "175",
+    "name": "Rega"
+  },
+  {
+    "id": "409",
+    "name": "Parasound"
+  },
+  {
+    "id": "181",
+    "name": "Kubala-Sosna"
+  },
+  {
+    "id": "182",
+    "name": "Naim"
+  },
+  {
+    "id": "188",
+    "name": "Nordost"
+  },
+  {
+    "id": "424",
+    "name": "Dynaudio"
+  },
+  {
+    "id": "403",
+    "name": "Luxman"
+  },
+  {
+    "id": "195",
+    "name": "Naim"
+  },
+  {
+    "id": "196",
+    "name": "Interconnects"
+  },
+  {
+    "id": "197",
+    "name": "Speaker Cables"
+  },
+  {
+    "id": "198",
+    "name": "Power Cords"
+  },
+  {
+    "id": "411",
+    "name": "Sonus Faber "
+  },
+  {
+    "id": "410",
+    "name": "Parasound"
+  },
+  {
+    "id": "214",
+    "name": "Dave - Yarmouth"
+  },
+  {
+    "id": "215",
+    "name": "DAN - HRM"
+  },
+  {
+    "id": "216",
+    "name": "Chris - Panels"
+  },
+  {
+    "id": "217",
+    "name": "Dragan - Chicago"
+  },
+  {
+    "id": "218",
+    "name": "Brooklyn Audio"
+  },
+  {
+    "id": "219",
+    "name": "Gary - N.B."
+  },
+  {
+    "id": "220",
+    "name": "Mark - Dartmouth"
+  },
+  {
+    "id": "221",
+    "name": "J.C. - Bridgewater"
+  },
+  {
+    "id": "222",
+    "name": "Paul - N.B."
+  },
+  {
+    "id": "223",
+    "name": "Gordon - Valley"
+  },
+  {
+    "id": "224",
+    "name": "Symposium"
+  },
+  {
+    "id": "225",
+    "name": "Solid Tech"
+  },
+  {
+    "id": "226",
+    "name": "Target"
+  },
+  {
+    "id": "400",
+    "name": "Luxman"
+  },
+  {
+    "id": "228",
+    "name": "Naim"
+  },
+  {
+    "id": "233",
+    "name": "PS Audio"
+  },
+  {
+    "id": "242",
+    "name": "Interconnects"
+  },
+  {
+    "id": "243",
+    "name": "Speaker Cables"
+  },
+  {
+    "id": "244",
+    "name": "Power Cords"
+  },
+  {
+    "id": "245",
+    "name": "Tonearm Cable"
+  },
+  {
+    "id": "250",
+    "name": "Naim"
+  },
+  {
+    "id": "251",
+    "name": "GoldenEar"
+  },
+  {
+    "id": "258",
+    "name": "Cardas"
+  },
+  {
+    "id": "259",
+    "name": "Interconnects"
+  },
+  {
+    "id": "260",
+    "name": "Speaker Cables"
+  },
+  {
+    "id": "261",
+    "name": "Power Cords"
+  },
+  {
+    "id": "262",
+    "name": "GoldenEar"
+  },
+  {
+    "id": "413",
+    "name": "Prima Luna"
+  },
+  {
+    "id": "264",
+    "name": "Power Supplies"
+  },
+  {
+    "id": "266",
+    "name": "Naim"
+  },
+  {
+    "id": "268",
+    "name": "Phono Cable"
+  },
+  {
+    "id": "271",
+    "name": "PS Audio"
+  },
+  {
+    "id": "272",
+    "name": "Digital Cables"
+  },
+  {
+    "id": "273",
+    "name": "USB 2.0"
+  },
+  {
+    "id": "282",
+    "name": "Zesto Audio"
+  },
+  {
+    "id": "434",
+    "name": "Lindemann"
+  },
+  {
+    "id": "295",
+    "name": "Music Hall"
+  },
+  {
+    "id": "422",
+    "name": "Fyne Audio"
+  },
+  {
+    "id": "421",
+    "name": "EAR"
+  },
+  {
+    "id": "309",
+    "name": "Soltanus Acoustics"
+  },
+  {
+    "id": "401",
+    "name": "Luxman"
+  },
+  {
+    "id": "311",
+    "name": "Rel"
+  },
+  {
+    "id": "312",
+    "name": "Sonus Faber"
+  },
+  {
+    "id": "313",
+    "name": "AudioQuest"
+  },
+  {
+    "id": "314",
+    "name": "AudioQuest"
+  },
+  {
+    "id": "316",
+    "name": "Interconnects"
+  },
+  {
+    "id": "317",
+    "name": "Speaker Cable"
+  },
+  {
+    "id": "318",
+    "name": "Power Cords"
+  },
+  {
+    "id": "319",
+    "name": "Digital Cables"
+  },
+  {
+    "id": "320",
+    "name": "Tonearm Cable"
+  },
+  {
+    "id": "321",
+    "name": "HDMI"
+  },
+  {
+    "id": "322",
+    "name": "USB"
+  },
+  {
+    "id": "323",
+    "name": "Ethernet"
+  },
+  {
+    "id": "324",
+    "name": "Subwoofer"
+  },
+  {
+    "id": "325",
+    "name": "AudioQuest"
+  },
+  {
+    "id": "328",
+    "name": "Auralic"
+  },
+  {
+    "id": "329",
+    "name": "Auralic"
+  },
+  {
+    "id": "332",
+    "name": "Rogue "
+  },
+  {
+    "id": "334",
+    "name": "Zesto Audio"
+  },
+  {
+    "id": "335",
+    "name": "Audioquest"
+  },
+  {
+    "id": "336",
+    "name": "Audioquest"
+  },
+  {
+    "id": "339",
+    "name": "Rogue Audio "
+  },
+  {
+    "id": "340",
+    "name": "Rogue Audio"
+  },
+  {
+    "id": "341",
+    "name": "Rogue Audio"
+  },
+  {
+    "id": "471",
+    "name": "Wattson Audio"
+  },
+  {
+    "id": "345",
+    "name": "HRS"
+  },
+  {
+    "id": "346",
+    "name": "Hegel"
+  },
+  {
+    "id": "347",
+    "name": "Hegel"
+  },
+  {
+    "id": "348",
+    "name": "Chord"
+  },
+  {
+    "id": "350",
+    "name": "Okki Nokki"
+  },
+  {
+    "id": "351",
+    "name": "PS Audio"
+  },
+  {
+    "id": "352",
+    "name": "Hegel"
+  },
+  {
+    "id": "354",
+    "name": "Hana"
+  },
+  {
+    "id": "356",
+    "name": "Kiseki"
+  },
+  {
+    "id": "357",
+    "name": "Audioquest"
+  },
+  {
+    "id": "358",
+    "name": "Lehmann Audio"
+  },
+  {
+    "id": "359",
+    "name": "Shunyata Research"
+  },
+  {
+    "id": "360",
+    "name": "Power Cords"
+  },
+  {
+    "id": "361",
+    "name": "Interconnects"
+  },
+  {
+    "id": "362",
+    "name": "Speaker Cables"
+  },
+  {
+    "id": "363",
+    "name": "Shunyata Research"
+  },
+  {
+    "id": "364",
+    "name": "Musical Fidelity"
+  },
+  {
+    "id": "365",
+    "name": "Musical Fidelity"
+  },
+  {
+    "id": "367",
+    "name": "Musical Fidelity"
+  },
+  {
+    "id": "368",
+    "name": "Chord"
+  },
+  {
+    "id": "414",
+    "name": "Norstone"
+  },
+  {
+    "id": "370",
+    "name": "Hegel"
+  },
+  {
+    "id": "372",
+    "name": "Goldnote"
+  },
+  {
+    "id": "373",
+    "name": "Acoustic Solid"
+  },
+  {
+    "id": "374",
+    "name": "Chord"
+  },
+  {
+    "id": "375",
+    "name": "Hegel"
+  },
+  {
+    "id": "376",
+    "name": "Melco"
+  },
+  {
+    "id": "377",
+    "name": "Transrotor"
+  },
+  {
+    "id": "378",
+    "name": "Sutherland"
+  },
+  {
+    "id": "405",
+    "name": "Mobile Fidelity"
+  },
+  {
+    "id": "380",
+    "name": "Prima Luna"
+  },
+  {
+    "id": "381",
+    "name": "Prima Luna"
+  },
+  {
+    "id": "382",
+    "name": "Prima Luna"
+  },
+  {
+    "id": "420",
+    "name": "Ear "
+  },
+  {
+    "id": "415",
+    "name": "Cambridge Audio"
+  },
+  {
+    "id": "390",
+    "name": "Nagaoka"
+  },
+  {
+    "id": "416",
+    "name": "Chord"
+  },
+  {
+    "id": "392",
+    "name": "Nordost"
+  },
+  {
+    "id": "393",
+    "name": "IsoAcoustics"
+  },
+  {
+    "id": "394",
+    "name": "Synergistic Research"
+  },
+  {
+    "id": "395",
+    "name": "Synergistic Research"
+  },
+  {
+    "id": "396",
+    "name": "Power Cords"
+  },
+  {
+    "id": "397",
+    "name": "Focal"
+  },
+  {
+    "id": "399",
+    "name": "Luxman"
+  },
+  {
+    "id": "425",
+    "name": "Interconnects"
+  },
+  {
+    "id": "426",
+    "name": "Speaker Cables"
+  },
+  {
+    "id": "427",
+    "name": "Ethernet"
+  },
+  {
+    "id": "428",
+    "name": "Wharfedale"
+  },
+  {
+    "id": "469",
+    "name": "Sugden "
+  },
+  {
+    "id": "430",
+    "name": "Sbooster"
+  },
+  {
+    "id": "431",
+    "name": "Sbooster"
+  },
+  {
+    "id": "435",
+    "name": "Luxman "
+  },
+  {
+    "id": "436",
+    "name": "Aurender"
+  },
+  {
+    "id": "437",
+    "name": "Luxman"
+  },
+  {
+    "id": "438",
+    "name": "Audio Technica "
+  },
+  {
+    "id": "439",
+    "name": "Audio Technica"
+  },
+  {
+    "id": "440",
+    "name": "Silent Angel"
+  },
+  {
+    "id": "441",
+    "name": "Sorane"
+  },
+  {
+    "id": "442",
+    "name": "Harbeth"
+  },
+  {
+    "id": "443",
+    "name": "Rogoz Audio"
+  },
+  {
+    "id": "444",
+    "name": "Entracte Audio"
+  },
+  {
+    "id": "333",
+    "name": "Zesto Audio"
+  },
+  {
+    "id": "445",
+    "name": "Leak Audio"
+  },
+  {
+    "id": "446",
+    "name": "Leak Audio "
+  },
+  {
+    "id": "447",
+    "name": "ProAc"
+  },
+  {
+    "id": "448",
+    "name": "Synergistic Research "
+  },
+  {
+    "id": "449",
+    "name": "Ethernet Cables"
+  },
+  {
+    "id": "450",
+    "name": "Digital Cables"
+  },
+  {
+    "id": "451",
+    "name": "Luxman"
+  },
+  {
+    "id": "452",
+    "name": "Hegel"
+  },
+  {
+    "id": "453",
+    "name": "Innuos"
+  },
+  {
+    "id": "454",
+    "name": "Meitner Audio"
+  },
+  {
+    "id": "470",
+    "name": "Atoll Electronique"
+  },
+  {
+    "id": "459",
+    "name": "Transrotor"
+  },
+  {
+    "id": "461",
+    "name": "Record Care"
+  },
+  {
+    "id": "462",
+    "name": "Roksan"
+  },
+  {
+    "id": "465",
+    "name": "Atoll Electronique"
+  },
+  {
+    "id": "466",
+    "name": "Atoll"
+  },
+  {
+    "id": "467",
+    "name": "Sugden "
+  },
+  {
+    "id": "468",
+    "name": "Revival Audio "
+  }
+]
