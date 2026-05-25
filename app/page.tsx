@@ -5,7 +5,7 @@ import { ProductGrid } from '@/components/ProductGrid'
 import { client } from '@/lib/sanity'
 
 async function getProducts() {
-  const query = `*[_type == "product" && inStock == true] | order(featured desc, _createdAt desc) [0...50] {
+  const query = `*[_type == "product" && inStock == true] | order(featured desc, _createdAt desc) {
     _id,
     name,
     brand,
