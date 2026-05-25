@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useMemo } from 'react'
+import { useState, useMemo, useEffect, useRef } from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
 import { urlFor } from '@/lib/sanity'
@@ -36,6 +36,12 @@ export function ProductGrid({ products, initialFilter = 'all', initialSubFilter 
   const [activeSubFilter] = useState(initialSubFilter)
   const [sortBy, setSortBy] = useState('default')
   const [page, setPage] = useState(1)
+  const mounted = useRef(false)
+
+  useEffect(() => {
+    if (!mounted.current) { mounted.current = true; return }
+    document.getElementById('products')?.scrollIntoView({ behavior: 'smooth' })
+  }, [page])
 
   const filteredProducts = useMemo(() => {
     let filtered = products
@@ -117,7 +123,7 @@ export function ProductGrid({ products, initialFilter = 'all', initialSubFilter 
         {totalPages > 1 && (
           <div className="flex items-center justify-center gap-2 mt-10">
             <button
-              onClick={() => { setPage(p => p - 1); document.getElementById('products')?.scrollIntoView({ behavior: 'smooth' }) }}
+              onClick={() => setPage(p => p - 1)}
               disabled={page === 1}
               className="font-sans text-[11px] font-medium tracking-wider uppercase px-5 py-2.5 border border-[var(--border)] text-[var(--text)] hover:bg-[var(--burgundy)] hover:text-white hover:border-[var(--burgundy)] transition-all disabled:opacity-30 disabled:cursor-not-allowed disabled:hover:bg-white disabled:hover:text-[var(--text)] disabled:hover:border-[var(--border)]"
             >
@@ -127,7 +133,7 @@ export function ProductGrid({ products, initialFilter = 'all', initialSubFilter 
               Page {page} of {totalPages}
             </span>
             <button
-              onClick={() => { setPage(p => p + 1); document.getElementById('products')?.scrollIntoView({ behavior: 'smooth' }) }}
+              onClick={() => setPage(p => p + 1)}
               disabled={page === totalPages}
               className="font-sans text-[11px] font-medium tracking-wider uppercase px-5 py-2.5 border border-[var(--border)] text-[var(--text)] hover:bg-[var(--burgundy)] hover:text-white hover:border-[var(--burgundy)] transition-all disabled:opacity-30 disabled:cursor-not-allowed disabled:hover:bg-white disabled:hover:text-[var(--text)] disabled:hover:border-[var(--border)]"
             >
