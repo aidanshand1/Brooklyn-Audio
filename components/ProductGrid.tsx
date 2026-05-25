@@ -29,10 +29,13 @@ interface ProductGridProps {
   initialSubFilter?: string
 }
 
+const PAGE_SIZE = 50
+
 export function ProductGrid({ products, initialFilter = 'all', initialSubFilter }: ProductGridProps) {
   const [activeFilter] = useState(initialFilter)
   const [activeSubFilter] = useState(initialSubFilter)
   const [sortBy, setSortBy] = useState('default')
+  const [page, setPage] = useState(1)
 
   const filteredProducts = useMemo(() => {
     let filtered = products
@@ -55,8 +58,12 @@ export function ProductGrid({ products, initialFilter = 'all', initialSubFilter 
       filtered = [...filtered].sort((a, b) => (b.price || 999999) - (a.price || 999999))
     }
 
+    setPage(1)
     return filtered
   }, [products, activeFilter, activeSubFilter, sortBy])
+
+  const totalPages = Math.ceil(filteredProducts.length / PAGE_SIZE)
+  const paginatedProducts = filteredProducts.slice((page - 1) * PAGE_SIZE, page * PAGE_SIZE)
 
   const activeLabel = activeSubFilter
     ? BROAD_CATEGORIES.find(c => c.key === activeFilter)?.subcategories.find(s => s.slug === activeSubFilter)?.label
@@ -100,9 +107,32 @@ export function ProductGrid({ products, initialFilter = 'all', initialSubFilter 
           </div>
         ) : (
           <div className="grid grid-cols-[repeat(auto-fill,minmax(230px,1fr))] gap-5">
-            {filteredProducts.map(product => (
+            {paginatedProducts.map(product => (
               <ProductCard key={product._id} product={product} />
             ))}
+          </div>
+        )}
+
+        {/* Pagination */}
+        {totalPages > 1 && (
+          <div className="flex items-center justify-center gap-2 mt-10">
+            <button
+              onClick={() => { setPage(p => p - 1); window.scrollTo({ top: 0, behavior: 'smooth' }) }}
+              disabled={page === 1}
+              className="font-sans text-[11px] font-medium tracking-wider uppercase px-5 py-2.5 border border-[var(--border)] text-[var(--text)] hover:bg-[var(--burgundy)] hover:text-white hover:border-[var(--burgundy)] transition-all disabled:opacity-30 disabled:cursor-not-allowed disabled:hover:bg-white disabled:hover:text-[var(--text)] disabled:hover:border-[var(--border)]"
+            >
+              ← Prev
+            </button>
+            <span className="font-sans text-xs text-[var(--muted)] px-4">
+              Page {page} of {totalPages}
+            </span>
+            <button
+              onClick={() => { setPage(p => p + 1); window.scrollTo({ top: 0, behavior: 'smooth' }) }}
+              disabled={page === totalPages}
+              className="font-sans text-[11px] font-medium tracking-wider uppercase px-5 py-2.5 border border-[var(--border)] text-[var(--text)] hover:bg-[var(--burgundy)] hover:text-white hover:border-[var(--burgundy)] transition-all disabled:opacity-30 disabled:cursor-not-allowed disabled:hover:bg-white disabled:hover:text-[var(--text)] disabled:hover:border-[var(--border)]"
+            >
+              Next →
+            </button>
           </div>
         )}
 
