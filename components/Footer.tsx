@@ -51,7 +51,7 @@ export function Footer() {
             Contact
           </div>
           <ul className="space-y-1">
-            <li><a href="tel:782-640-3160" className="text-[#c8c0b8] text-xs hover:text-white transition-colors">782-640-3160</a></li>
+            <li><a href="tel:9024638773" className="text-[#c8c0b8] text-xs hover:text-white transition-colors">(902) 463-8773</a></li>
             <li><a href="mailto:jody.crane@ns.sympatico.ca" className="text-[#c8c0b8] text-xs hover:text-white transition-colors">jody.crane@ns.sympatico.ca</a></li>
             <li className="mt-3">
               <Link href="/about" className="text-[#c8c0b8] text-xs hover:text-white transition-colors">About</Link>

@@ -51,10 +51,10 @@ export function Navigation() {
       </div>
 
       <a
-        href="tel:7826403160"
+        href="tel:9024638773"
         className="text-xs text-[var(--muted)] hover:text-[var(--text)] transition-colors"
       >
-        782-640-3160
+        (902) 463-8773
       </a>
     </nav>
   )

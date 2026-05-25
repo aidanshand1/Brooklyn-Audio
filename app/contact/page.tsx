@@ -35,12 +35,7 @@ export default async function Contact({
             {[
               {
                 label: 'Phone',
-                value: '782-640-3160',
-                href: 'tel:7826403160',
-              },
-              {
-                label: 'Appointments',
-                value: '902-463-8773',
+                value: '(902) 463-8773',
                 href: 'tel:9024638773',
               },
               {

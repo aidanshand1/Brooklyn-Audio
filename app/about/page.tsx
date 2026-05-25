@@ -61,7 +61,7 @@ export default function About() {
             Arrange a listening session
           </div>
           <div className="text-[13px] leading-loose">
-            <span className="text-[var(--text)] font-medium">902-463-8773</span>
+            <span className="text-[var(--text)] font-medium">(902) 463-8773</span>
             <span className="mx-2 text-[var(--light)]">·</span>
             <a
               href="mailto:jody.crane@ns.sympatico.ca"
