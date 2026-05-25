@@ -7,7 +7,7 @@ import { client } from '@/lib/sanity'
 import { BROAD_CATEGORIES } from '@/lib/categories'
 
 async function getProducts() {
-  const query = `*[_type == "product" && inStock == true] | order(featured desc, _createdAt desc) [0...50] {
+  const query = `*[_type == "product" && inStock == true] | order(featured desc, _createdAt desc) {
     _id,
     name,
     brand,
