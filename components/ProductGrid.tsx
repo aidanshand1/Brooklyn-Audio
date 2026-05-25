@@ -117,7 +117,7 @@ export function ProductGrid({ products, initialFilter = 'all', initialSubFilter 
         {totalPages > 1 && (
           <div className="flex items-center justify-center gap-2 mt-10">
             <button
-              onClick={() => { setPage(p => p - 1); window.scrollTo({ top: 0, behavior: 'smooth' }) }}
+              onClick={() => { setPage(p => p - 1); document.getElementById('products')?.scrollIntoView({ behavior: 'smooth' }) }}
               disabled={page === 1}
               className="font-sans text-[11px] font-medium tracking-wider uppercase px-5 py-2.5 border border-[var(--border)] text-[var(--text)] hover:bg-[var(--burgundy)] hover:text-white hover:border-[var(--burgundy)] transition-all disabled:opacity-30 disabled:cursor-not-allowed disabled:hover:bg-white disabled:hover:text-[var(--text)] disabled:hover:border-[var(--border)]"
             >
@@ -127,7 +127,7 @@ export function ProductGrid({ products, initialFilter = 'all', initialSubFilter 
               Page {page} of {totalPages}
             </span>
             <button
-              onClick={() => { setPage(p => p + 1); window.scrollTo({ top: 0, behavior: 'smooth' }) }}
+              onClick={() => { setPage(p => p + 1); document.getElementById('products')?.scrollIntoView({ behavior: 'smooth' }) }}
               disabled={page === totalPages}
               className="font-sans text-[11px] font-medium tracking-wider uppercase px-5 py-2.5 border border-[var(--border)] text-[var(--text)] hover:bg-[var(--burgundy)] hover:text-white hover:border-[var(--burgundy)] transition-all disabled:opacity-30 disabled:cursor-not-allowed disabled:hover:bg-white disabled:hover:text-[var(--text)] disabled:hover:border-[var(--border)]"
             >
