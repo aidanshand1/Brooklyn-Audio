@@ -18,6 +18,7 @@
     "next-sanity": "^12",
     "react": "^19",
     "react-dom": "^19",
+    "sanity": "^5.30.0",
     "sanity-plugin-hotspot-array": "^3.0.2"
   },
   "devDependencies": {
