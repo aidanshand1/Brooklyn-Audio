@@ -1,8 +1,7 @@
 import './globals.css'
 import type { Metadata } from 'next'
 import { Inter, Cormorant_Garamond } from 'next/font/google'
-import { Navigation } from '@/components/Navigation'
-import { Footer } from '@/components/Footer'
+import { ConditionalChrome } from './ConditionalChrome'
 
 const inter = Inter({ 
   subsets: ['latin'],
@@ -30,9 +29,7 @@ export default function RootLayout({
   return (
     <html lang="en" className={`${inter.variable} ${cormorant.variable}`}>
       <body suppressHydrationWarning>
-        <Navigation />
-        <main>{children}</main>
-        <Footer />
+        <ConditionalChrome>{children}</ConditionalChrome>
       </body>
     </html>
   )

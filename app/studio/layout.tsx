@@ -1,4 +1,3 @@
-// Remove default navigation for Studio pages
 export default function StudioLayout({
   children,
 }: {
