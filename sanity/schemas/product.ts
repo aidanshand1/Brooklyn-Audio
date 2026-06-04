@@ -2,6 +2,7 @@ export const product = {
   name: 'product',
   title: 'Product',
   type: 'document',
+  liveEdit: false,
   fields: [
     {
       name: 'name',
