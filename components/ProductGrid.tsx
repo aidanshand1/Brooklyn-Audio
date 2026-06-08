@@ -1,6 +1,7 @@
 'use client'
 
 import { useState, useMemo, useEffect, useRef } from 'react'
+import { useSearchParams } from 'next/navigation'
 import Image from 'next/image'
 import Link from 'next/link'
 import { urlFor } from '@/lib/sanity'
@@ -26,14 +27,13 @@ interface Product {
 interface ProductGridProps {
   products: Product[]
   initialFilter?: string
-  initialSubFilter?: string
 }
 
 const PAGE_SIZE = 50
 
-export function ProductGrid({ products, initialFilter = 'all', initialSubFilter }: ProductGridProps) {
-  const [activeFilter] = useState(initialFilter)
-  const [activeSubFilter] = useState(initialSubFilter)
+export function ProductGrid({ products, initialFilter = 'all' }: ProductGridProps) {
+  const searchParams = useSearchParams()
+  const initialSubFilter = searchParams.get('sub') ?? undefined
   const [sortBy, setSortBy] = useState('default')
   const [page, setPage] = useState(1)
   const mounted = useRef(false)
@@ -43,15 +43,19 @@ export function ProductGrid({ products, initialFilter = 'all', initialSubFilter 
     document.getElementById('products')?.scrollIntoView({ behavior: 'smooth' })
   }, [page])
 
+  useEffect(() => {
+    setPage(1)
+  }, [initialFilter, initialSubFilter, sortBy])
+
   const filteredProducts = useMemo(() => {
     let filtered = products
 
-    if (activeFilter !== 'all') {
-      const broad = BROAD_CATEGORIES.find(c => c.key === activeFilter)
+    if (initialFilter !== 'all') {
+      const broad = BROAD_CATEGORIES.find(c => c.key === initialFilter)
       if (broad?.conditionFilter) {
         filtered = filtered.filter(p => p.condition === 'used' || p.condition === 'demo')
-      } else if (activeSubFilter) {
-        filtered = filtered.filter(p => p.category?.slug?.current === activeSubFilter)
+      } else if (initialSubFilter) {
+        filtered = filtered.filter(p => p.category?.slug?.current === initialSubFilter)
       } else if (broad?.subcategories.length) {
         const slugs = broad.subcategories.map(s => s.slug)
         filtered = filtered.filter(p => slugs.includes(p.category?.slug?.current))
@@ -59,21 +63,30 @@ export function ProductGrid({ products, initialFilter = 'all', initialSubFilter 
     }
 
     if (sortBy === 'price-asc') {
-      filtered = [...filtered].sort((a, b) => (a.price || 0) - (b.price || 0))
+      filtered = [...filtered].sort((a, b) => {
+        if (a.price == null && b.price == null) return 0
+        if (a.price == null) return 1
+        if (b.price == null) return -1
+        return a.price - b.price
+      })
     } else if (sortBy === 'price-desc') {
-      filtered = [...filtered].sort((a, b) => (b.price || 999999) - (a.price || 999999))
+      filtered = [...filtered].sort((a, b) => {
+        if (a.price == null && b.price == null) return 0
+        if (a.price == null) return 1
+        if (b.price == null) return -1
+        return b.price - a.price
+      })
     }
 
-    setPage(1)
     return filtered
-  }, [products, activeFilter, activeSubFilter, sortBy])
+  }, [products, initialFilter, initialSubFilter, sortBy])
 
   const totalPages = Math.ceil(filteredProducts.length / PAGE_SIZE)
   const paginatedProducts = filteredProducts.slice((page - 1) * PAGE_SIZE, page * PAGE_SIZE)
 
-  const activeLabel = activeSubFilter
-    ? BROAD_CATEGORIES.find(c => c.key === activeFilter)?.subcategories.find(s => s.slug === activeSubFilter)?.label
-    : BROAD_CATEGORIES.find(c => c.key === activeFilter)?.label
+  const activeLabel = initialSubFilter
+    ? BROAD_CATEGORIES.find(c => c.key === initialFilter)?.subcategories.find(s => s.slug === initialSubFilter)?.label
+    : BROAD_CATEGORIES.find(c => c.key === initialFilter)?.label
 
   return (
     <div id="products" className="bg-white">
@@ -81,7 +94,7 @@ export function ProductGrid({ products, initialFilter = 'all', initialSubFilter 
       <div className="flex items-center justify-between px-10 py-4 border-b border-[var(--border)]">
         <div className="text-xs text-[var(--muted)]">
           {filteredProducts.length} item{filteredProducts.length !== 1 ? 's' : ''}
-          {activeFilter !== 'all' && activeLabel && (
+          {initialFilter !== 'all' && activeLabel && (
             <span className="text-[var(--light)]"> — {activeLabel}</span>
           )}
         </div>

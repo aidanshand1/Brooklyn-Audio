@@ -2,6 +2,7 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { notFound } from 'next/navigation'
 import { client, urlFor } from '@/lib/sanity'
+import { BROAD_CATEGORIES } from '@/lib/categories'
 
 interface Product {
   _id: string
@@ -61,6 +62,11 @@ export default async function ProductPage({
   const enquireHref = `/contact?subject=${encodeURIComponent(`Enquiry: ${product.name}`)}`
   const cond = conditionMeta[product.condition]
 
+  const categorySlug = product.category?.slug?.current
+  const broadCategoryKey = BROAD_CATEGORIES.find(
+    bc => bc.key === categorySlug || bc.subcategories.some(s => s.slug === categorySlug)
+  )?.key
+
   return (
     <div className="bg-white">
 
@@ -69,9 +75,9 @@ export default async function ProductPage({
         <div className="flex items-center gap-2 text-[11px] text-[var(--muted)]">
           <Link href="/" className="hover:text-[var(--text)] transition-colors">Shop</Link>
           <span className="text-[var(--border2)]">›</span>
-          {product.category && (
+          {product.category && broadCategoryKey && (
             <>
-              <Link href={`/category/${product.category.slug?.current}`} className="hover:text-[var(--text)] transition-colors">
+              <Link href={`/category/${broadCategoryKey}`} className="hover:text-[var(--text)] transition-colors">
                 {product.category.name}
               </Link>
               <span className="text-[var(--border2)]">›</span>
@@ -157,11 +163,11 @@ export default async function ProductPage({
               Enquire about this item
             </Link>
             <a
-              href="tel:7826403160"
+              href="tel:9024638773"
               className="flex items-center justify-center gap-2 w-full font-sans text-[11px] font-medium tracking-wider uppercase px-5 py-3.5 border border-[var(--border)] text-[var(--muted)] hover:border-[var(--text)] hover:text-[var(--text)] transition-colors"
             >
               <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 10.8a19.79 19.79 0 01-3.07-8.67A2 2 0 012 0h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.09 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 14.92v2z" /></svg>
-              782-640-3160
+              (902) 463-8773
             </a>
           </div>
 

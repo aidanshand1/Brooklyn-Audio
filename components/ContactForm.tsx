@@ -20,14 +20,24 @@ export function ContactForm({ initialSubject = '' }: { initialSubject?: string }
     })
   }
 
+  const [error, setError] = useState('')
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
     setIsSubmitting(true)
-    
-    // Simulate form submission
-    await new Promise(resolve => setTimeout(resolve, 1000))
-    
-    setSubmitted(true)
+    setError('')
+
+    const res = await fetch('/api/contact', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(formData),
+    })
+
+    if (res.ok) {
+      setSubmitted(true)
+    } else {
+      setError('Something went wrong — please call us or try again.')
+    }
     setIsSubmitting(false)
   }
 
@@ -106,6 +116,9 @@ export function ContactForm({ initialSubject = '' }: { initialSubject?: string }
         />
       </div>
       
+      {error && (
+        <p className="text-[12px] text-[var(--red)]">{error}</p>
+      )}
       <button
         type="submit"
         disabled={isSubmitting}

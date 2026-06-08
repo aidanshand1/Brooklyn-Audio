@@ -1,3 +1,4 @@
+import { Suspense } from 'react'
 import Link from 'next/link'
 import { notFound } from 'next/navigation'
 import { Hero } from '@/components/Hero'
@@ -72,7 +73,9 @@ export default async function CategoryPage({
         <p className="text-[13px] text-[var(--muted)] mt-2">{category.description}</p>
       </div>
 
-      <ProductGrid products={products} initialFilter={slug} initialSubFilter={sub} />
+      <Suspense>
+        <ProductGrid products={products} initialFilter={slug} />
+      </Suspense>
     </>
   )
 }
