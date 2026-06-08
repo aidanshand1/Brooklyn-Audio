@@ -1,7 +1,7 @@
 'use client'
 
 import { useState, useMemo, useEffect, useRef } from 'react'
-import { useSearchParams } from 'next/navigation'
+import { useSearchParams, useRouter } from 'next/navigation'
 import Image from 'next/image'
 import Link from 'next/link'
 import { urlFor } from '@/lib/sanity'
@@ -32,11 +32,26 @@ interface ProductGridProps {
 const PAGE_SIZE = 50
 
 export function ProductGrid({ products, initialFilter = 'all' }: ProductGridProps) {
+  const router = useRouter()
   const searchParams = useSearchParams()
-  const initialSubFilter = searchParams.get('sub') ?? undefined
+
+  const [activeSub, setActiveSub] = useState<string | undefined>(
+    searchParams.get('sub') ?? undefined
+  )
   const [sortBy, setSortBy] = useState('default')
   const [page, setPage] = useState(1)
   const mounted = useRef(false)
+
+  const category = initialFilter !== 'all'
+    ? BROAD_CATEGORIES.find(c => c.key === initialFilter)
+    : null
+
+  const handleSubClick = (sub: string | undefined) => {
+    setActiveSub(sub)
+    const params = new URLSearchParams()
+    if (sub) params.set('sub', sub)
+    router.replace(`?${params.toString()}`, { scroll: false })
+  }
 
   useEffect(() => {
     if (!mounted.current) { mounted.current = true; return }
@@ -45,7 +60,7 @@ export function ProductGrid({ products, initialFilter = 'all' }: ProductGridProp
 
   useEffect(() => {
     setPage(1)
-  }, [initialFilter, initialSubFilter, sortBy])
+  }, [initialFilter, activeSub, sortBy])
 
   const filteredProducts = useMemo(() => {
     let filtered = products
@@ -54,8 +69,8 @@ export function ProductGrid({ products, initialFilter = 'all' }: ProductGridProp
       const broad = BROAD_CATEGORIES.find(c => c.key === initialFilter)
       if (broad?.conditionFilter) {
         filtered = filtered.filter(p => p.condition === 'used' || p.condition === 'demo')
-      } else if (initialSubFilter) {
-        filtered = filtered.filter(p => p.category?.slug?.current === initialSubFilter)
+      } else if (activeSub) {
+        filtered = filtered.filter(p => p.category?.slug?.current === activeSub)
       } else if (broad?.subcategories.length) {
         const slugs = broad.subcategories.map(s => s.slug)
         filtered = filtered.filter(p => slugs.includes(p.category?.slug?.current))
@@ -79,22 +94,52 @@ export function ProductGrid({ products, initialFilter = 'all' }: ProductGridProp
     }
 
     return filtered
-  }, [products, initialFilter, initialSubFilter, sortBy])
+  }, [products, initialFilter, activeSub, sortBy])
 
   const totalPages = Math.ceil(filteredProducts.length / PAGE_SIZE)
   const paginatedProducts = filteredProducts.slice((page - 1) * PAGE_SIZE, page * PAGE_SIZE)
 
-  const activeLabel = initialSubFilter
-    ? BROAD_CATEGORIES.find(c => c.key === initialFilter)?.subcategories.find(s => s.slug === initialSubFilter)?.label
-    : BROAD_CATEGORIES.find(c => c.key === initialFilter)?.label
+  const activeLabel = activeSub
+    ? category?.subcategories.find(s => s.slug === activeSub)?.label
+    : category?.label
 
   return (
     <div id="products" className="bg-white">
+
+      {/* Subcategory tabs */}
+      {category && category.subcategories.length > 0 && !category.conditionFilter && (
+        <div className="flex items-center border-b border-[var(--border)] px-10 overflow-x-auto gap-0">
+          <button
+            onClick={() => handleSubClick(undefined)}
+            className={`font-sans text-[11px] font-medium tracking-wider uppercase px-5 py-3.5 border-b-2 whitespace-nowrap transition-colors ${
+              !activeSub
+                ? 'border-[var(--red)] text-[var(--red)]'
+                : 'border-transparent text-[var(--muted)] hover:text-[var(--text)]'
+            }`}
+          >
+            All
+          </button>
+          {category.subcategories.map(sub => (
+            <button
+              key={sub.slug}
+              onClick={() => handleSubClick(sub.slug)}
+              className={`font-sans text-[11px] font-medium tracking-wider uppercase px-5 py-3.5 border-b-2 whitespace-nowrap transition-colors ${
+                activeSub === sub.slug
+                  ? 'border-[var(--red)] text-[var(--red)]'
+                  : 'border-transparent text-[var(--muted)] hover:text-[var(--text)]'
+              }`}
+            >
+              {sub.label}
+            </button>
+          ))}
+        </div>
+      )}
+
       {/* Controls */}
       <div className="flex items-center justify-between px-10 py-4 border-b border-[var(--border)]">
         <div className="text-xs text-[var(--muted)]">
           {filteredProducts.length} item{filteredProducts.length !== 1 ? 's' : ''}
-          {initialFilter !== 'all' && activeLabel && (
+          {activeLabel && initialFilter !== 'all' && (
             <span className="text-[var(--light)]"> — {activeLabel}</span>
           )}
         </div>
