@@ -1,7 +1,6 @@
 import { Suspense } from 'react'
 import Link from 'next/link'
 import { notFound } from 'next/navigation'
-import { Hero } from '@/components/Hero'
 import { CategoryStrip } from '@/components/CategoryStrip'
 import { ProductGrid } from '@/components/ProductGrid'
 import { client } from '@/lib/sanity'
@@ -47,7 +46,6 @@ export default async function CategoryPage({
 
   return (
     <>
-      <Hero />
       <CategoryStrip activeCategory={slug} />
 
       {/* Category header */}

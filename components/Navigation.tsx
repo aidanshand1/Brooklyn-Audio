@@ -6,7 +6,7 @@ import { usePathname } from 'next/navigation'
 export function Navigation() {
   const pathname = usePathname()
 
-  const isShop = pathname === '/' || pathname.startsWith('/category/')
+  const isShop = pathname === '/' || pathname.startsWith('/category/') || pathname.startsWith('/product/')
 
   return (
     <nav className="bg-white border-b border-[var(--border)] sticky top-0 z-50 flex items-center justify-between px-10 h-[60px]">

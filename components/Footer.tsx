@@ -65,7 +65,7 @@ export function Footer() {
       
       <div className="border-t border-[#2e2a27] pt-4 flex justify-between">
         <div className="text-[11px] text-[#6b6460]">
-          © 2026 Brooklyn Audio Inc. All rights reserved.
+          © {new Date().getFullYear()} Brooklyn Audio Inc. All rights reserved.
         </div>
         <div className="text-[11px] text-[#6b6460]">
           Est. 1994 · Dartmouth, NS

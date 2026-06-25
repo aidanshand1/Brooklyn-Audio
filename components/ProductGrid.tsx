@@ -35,10 +35,10 @@ export function ProductGrid({ products, initialFilter = 'all' }: ProductGridProp
   const router = useRouter()
   const searchParams = useSearchParams()
 
-  const [activeSub, setActiveSub] = useState<string | undefined>(
-    searchParams.get('sub') ?? undefined
-  )
-  const [brandSearch, setBrandSearch] = useState('')
+  // Derive a plain string so useEffect compares by value, not object reference
+  const subFromUrl = searchParams.get('sub') ?? undefined
+
+  const [activeSub, setActiveSub] = useState<string | undefined>(subFromUrl)
   const [sortBy, setSortBy] = useState('default')
   const [page, setPage] = useState(1)
   const mounted = useRef(false)
@@ -47,9 +47,10 @@ export function ProductGrid({ products, initialFilter = 'all' }: ProductGridProp
     ? BROAD_CATEGORIES.find(c => c.key === initialFilter)
     : null
 
+  // Sync local state whenever the URL ?sub= value changes
   useEffect(() => {
-    setActiveSub(searchParams.get('sub') ?? undefined)
-  }, [searchParams])
+    setActiveSub(subFromUrl)
+  }, [subFromUrl])
 
   const handleSubClick = (sub: string | undefined) => {
     setActiveSub(sub)
@@ -65,7 +66,7 @@ export function ProductGrid({ products, initialFilter = 'all' }: ProductGridProp
 
   useEffect(() => {
     setPage(1)
-  }, [initialFilter, activeSub, brandSearch, sortBy])
+  }, [initialFilter, activeSub, sortBy])
 
   const filteredProducts = useMemo(() => {
     let filtered = products
@@ -80,11 +81,6 @@ export function ProductGrid({ products, initialFilter = 'all' }: ProductGridProp
         const slugs = broad.subcategories.map(s => s.slug)
         filtered = filtered.filter(p => slugs.includes(p.category?.slug?.current))
       }
-    }
-
-    if (brandSearch.trim()) {
-      const q = brandSearch.toLowerCase()
-      filtered = filtered.filter(p => p.brand.toLowerCase().includes(q))
     }
 
     if (sortBy === 'price-asc') {
@@ -104,7 +100,7 @@ export function ProductGrid({ products, initialFilter = 'all' }: ProductGridProp
     }
 
     return filtered
-  }, [products, initialFilter, activeSub, brandSearch, sortBy])
+  }, [products, initialFilter, activeSub, sortBy])
 
   const totalPages = Math.ceil(filteredProducts.length / PAGE_SIZE)
   const paginatedProducts = filteredProducts.slice((page - 1) * PAGE_SIZE, page * PAGE_SIZE)
@@ -146,34 +142,17 @@ export function ProductGrid({ products, initialFilter = 'all' }: ProductGridProp
       )}
 
       {/* Controls */}
-      <div className="flex items-center justify-between gap-4 px-10 py-4 border-b border-[var(--border)]">
-        <div className="text-xs text-[var(--muted)] shrink-0">
+      <div className="flex items-center justify-between px-10 py-4 border-b border-[var(--border)]">
+        <div className="text-xs text-[var(--muted)]">
           {filteredProducts.length} item{filteredProducts.length !== 1 ? 's' : ''}
           {activeLabel && initialFilter !== 'all' && (
             <span className="text-[var(--light)]"> — {activeLabel}</span>
           )}
         </div>
-        <div className="flex items-center gap-2 flex-1 max-w-xs">
-          <input
-            type="text"
-            placeholder="Search by brand..."
-            value={brandSearch}
-            onChange={(e) => setBrandSearch(e.target.value)}
-            className="w-full font-sans text-xs text-[var(--text)] bg-white border border-[var(--border)] py-1.5 px-3 outline-none focus:border-[var(--text)] transition-colors placeholder:text-[var(--muted)]"
-          />
-          {brandSearch && (
-            <button
-              onClick={() => setBrandSearch('')}
-              className="font-sans text-xs text-[var(--muted)] hover:text-[var(--text)] transition-colors whitespace-nowrap"
-            >
-              ✕
-            </button>
-          )}
-        </div>
         <select
           value={sortBy}
           onChange={(e) => setSortBy(e.target.value)}
-          className="font-sans text-xs text-[var(--text)] bg-white border border-[var(--border)] py-1.5 px-3 cursor-pointer outline-none shrink-0"
+          className="font-sans text-xs text-[var(--text)] bg-white border border-[var(--border)] py-1.5 px-3 cursor-pointer outline-none"
         >
           <option value="default">Sort: Featured</option>
           <option value="price-asc">Price: Low to High</option>
@@ -250,6 +229,8 @@ export function ProductGrid({ products, initialFilter = 'all' }: ProductGridProp
 }
 
 function ProductCard({ product }: { product: Product }) {
+  const router = useRouter()
+
   const conditionStyle = {
     new: 'bg-[var(--red)] text-white',
     demo: 'bg-[#5a5a5a] text-white',
@@ -291,18 +272,20 @@ function ProductCard({ product }: { product: Product }) {
         <div className="mt-4 pt-3 border-t border-[var(--border)] flex items-center justify-between gap-3">
           {product.priceOnRequest ? (
             <div className="text-xs text-[var(--muted)] tracking-wider">Price on request</div>
-          ) : (
+          ) : product.price != null ? (
             <div className="font-serif text-[22px] font-normal text-[var(--burgundy)]">
-              ${product.price?.toLocaleString()}
+              ${product.price.toLocaleString()}
             </div>
+          ) : (
+            <div className="text-xs text-[var(--muted)] tracking-wider">Contact for pricing</div>
           )}
-          <Link
-            href={enquireHref}
+          {/* button instead of nested <a> to avoid invalid HTML */}
+          <button
+            onClick={(e) => { e.preventDefault(); e.stopPropagation(); router.push(enquireHref) }}
             className="flex-shrink-0 text-[10px] font-medium tracking-wider uppercase text-[var(--muted)] border border-[var(--border)] px-3 py-1.5 hover:bg-[var(--burgundy)] hover:text-white hover:border-[var(--burgundy)] transition-all"
-            onClick={(e) => e.stopPropagation()}
           >
             Enquire
-          </Link>
+          </button>
         </div>
       </div>
     </>

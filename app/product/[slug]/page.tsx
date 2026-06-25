@@ -144,12 +144,17 @@ export default async function ProductPage({
                 <div className="text-[10px] font-medium tracking-widest uppercase text-[var(--muted)] mb-1.5">Price</div>
                 <div className="font-serif text-[20px] font-light text-[var(--muted)] italic">Available on request</div>
               </>
-            ) : (
+            ) : product.price != null ? (
               <>
                 <div className="text-[10px] font-medium tracking-widest uppercase text-[var(--muted)] mb-1.5">Price (CAD)</div>
                 <div className="font-serif text-[42px] font-light text-[var(--burgundy)] leading-none">
-                  ${product.price?.toLocaleString()}
+                  ${product.price.toLocaleString()}
                 </div>
+              </>
+            ) : (
+              <>
+                <div className="text-[10px] font-medium tracking-widest uppercase text-[var(--muted)] mb-1.5">Price</div>
+                <div className="font-serif text-[20px] font-light text-[var(--muted)] italic">Contact for pricing</div>
               </>
             )}
           </div>
