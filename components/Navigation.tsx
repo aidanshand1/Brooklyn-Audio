@@ -14,8 +14,14 @@ export function Navigation() {
   const handleSearch = (e: React.FormEvent) => {
     e.preventDefault()
     const q = query.trim()
-    if (q) router.push(`/?q=${encodeURIComponent(q)}`)
-    else router.push('/')
+    if (q) {
+      router.push(`/?q=${encodeURIComponent(q)}`)
+      setTimeout(() => {
+        document.getElementById('products')?.scrollIntoView({ behavior: 'smooth' })
+      }, 150)
+    } else {
+      router.push('/')
+    }
   }
 
   return (

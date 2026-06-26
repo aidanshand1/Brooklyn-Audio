@@ -33,9 +33,11 @@ export default async function Home() {
       <Hero />
       <CategoryStrip activeCategory="all" />
       <ShowroomSection />
-      <Suspense>
-        <ProductGrid products={products} initialFilter="all" />
-      </Suspense>
+      <div id="products">
+        <Suspense>
+          <ProductGrid products={products} initialFilter="all" />
+        </Suspense>
+      </div>
     </>
   )
 }
