@@ -1,13 +1,19 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useEffect, Suspense } from 'react'
 import Link from 'next/link'
-import { usePathname, useRouter } from 'next/navigation'
+import { usePathname, useRouter, useSearchParams } from 'next/navigation'
 
-export function Navigation() {
+function NavigationInner() {
   const pathname = usePathname()
   const router = useRouter()
-  const [query, setQuery] = useState('')
+  const searchParams = useSearchParams()
+  const qFromUrl = searchParams.get('q') ?? ''
+  const [query, setQuery] = useState(qFromUrl)
+
+  useEffect(() => {
+    setQuery(qFromUrl)
+  }, [qFromUrl])
 
   const isShop = pathname === '/' || pathname.startsWith('/category/') || pathname.startsWith('/product/')
 
@@ -96,5 +102,13 @@ export function Navigation() {
         (902) 463-8773
       </a>
     </nav>
+  )
+}
+
+export function Navigation() {
+  return (
+    <Suspense>
+      <NavigationInner />
+    </Suspense>
   )
 }
