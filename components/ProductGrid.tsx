@@ -35,6 +35,13 @@ export function ProductGrid({ products, initialFilter = 'all' }: ProductGridProp
   const router = useRouter()
   const searchParams = useSearchParams()
   const subFromUrl = searchParams.get('sub') ?? undefined
+  const rawQuery = searchParams.get('q') ?? ''
+
+  // Normalise: lowercase, strip punctuation/hyphens so "audio-technica" matches "audio technica"
+  const normalize = (s: string) =>
+    s.toLowerCase().replace(/[-_/.,&+]/g, ' ').replace(/\s+/g, ' ').trim()
+
+  const qTerms = normalize(rawQuery).split(' ').filter(Boolean)
 
   const [activeSub, setActiveSub] = useState<string | undefined>(subFromUrl)
   const [sortBy, setSortBy] = useState('default')
@@ -95,7 +102,7 @@ export function ProductGrid({ products, initialFilter = 'all' }: ProductGridProp
 
   useEffect(() => {
     setPage(1)
-  }, [initialFilter, activeSub, sortBy, selectedBrands, priceMin, priceMax, selectedConditions])
+  }, [initialFilter, activeSub, rawQuery, sortBy, selectedBrands, priceMin, priceMax, selectedConditions])
 
   // Step 1: category/subcategory filter only (used to derive available sidebar options)
   const categoryFiltered = useMemo(() => {
@@ -136,6 +143,20 @@ export function ProductGrid({ products, initialFilter = 'all' }: ProductGridProp
   const filteredProducts = useMemo(() => {
     let filtered = categoryFiltered
 
+    if (qTerms.length > 0) {
+      filtered = filtered.filter(p => {
+        const haystack = normalize([
+          p.name,
+          p.brand,
+          p.model ?? '',
+          p.category?.name ?? '',
+          p.condition,
+          p.description ?? '',
+        ].join(' '))
+        return qTerms.every(term => haystack.includes(term))
+      })
+    }
+
     if (selectedBrands.size > 0) {
       filtered = filtered.filter(p => selectedBrands.has(p.brand))
     }
@@ -166,7 +187,7 @@ export function ProductGrid({ products, initialFilter = 'all' }: ProductGridProp
     }
 
     return filtered
-  }, [categoryFiltered, selectedBrands, priceMin, priceMax, selectedConditions, sortBy])
+  }, [categoryFiltered, qTerms.join(' '), selectedBrands, priceMin, priceMax, selectedConditions, sortBy])
 
   const totalPages = Math.ceil(filteredProducts.length / PAGE_SIZE)
   const paginatedProducts = filteredProducts.slice((page - 1) * PAGE_SIZE, page * PAGE_SIZE)
@@ -319,7 +340,10 @@ export function ProductGrid({ products, initialFilter = 'all' }: ProductGridProp
           <div className="flex items-center justify-between px-8 py-4 border-b border-[var(--border)]">
             <div className="text-xs text-[var(--muted)]">
               {filteredProducts.length} item{filteredProducts.length !== 1 ? 's' : ''}
-              {activeLabel && initialFilter !== 'all' && (
+              {rawQuery && (
+                <span className="text-[var(--light)]"> — results for "{rawQuery}"</span>
+              )}
+              {!rawQuery && activeLabel && initialFilter !== 'all' && (
                 <span className="text-[var(--light)]"> — {activeLabel}</span>
               )}
             </div>
