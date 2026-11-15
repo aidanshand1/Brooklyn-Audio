@@ -184,6 +184,16 @@ export function ProductGrid({ products, initialFilter = 'all' }: ProductGridProp
         if (b.price == null) return -1
         return b.price - a.price
       })
+    } else if (sortBy === 'brand-asc') {
+      filtered = [...filtered].sort((a, b) => {
+        if (!a.brand && !b.brand) return 0
+        if (!a.brand) return 1
+        if (!b.brand) return -1
+        return (
+          a.brand.localeCompare(b.brand, undefined, { sensitivity: 'base' }) ||
+          (a.name ?? '').localeCompare(b.name ?? '', undefined, { sensitivity: 'base' })
+        )
+      })
     }
 
     return filtered
@@ -355,6 +365,7 @@ export function ProductGrid({ products, initialFilter = 'all' }: ProductGridProp
               <option value="default">Sort: Featured</option>
               <option value="price-asc">Price: Low to High</option>
               <option value="price-desc">Price: High to Low</option>
+              <option value="brand-asc">Brand: A to Z</option>
             </select>
           </div>
 
