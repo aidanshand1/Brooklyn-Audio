@@ -65,10 +65,21 @@ export const product = {
     },
     {
       name: 'image',
-      title: 'Product Image',
+      title: 'Main Image',
+      description: 'Shown in product listings and first on the product page.',
       type: 'image',
       options: {
         hotspot: true,
+      },
+    },
+    {
+      name: 'gallery',
+      title: 'Additional Images',
+      description: 'Optional extra photos for the product page. You can drop several files at once and drag to reorder.',
+      type: 'array',
+      of: [{ type: 'image', options: { hotspot: true } }],
+      options: {
+        layout: 'grid',
       },
     },
     {

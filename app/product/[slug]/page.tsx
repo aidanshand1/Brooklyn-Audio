@@ -1,8 +1,8 @@
-import Image from 'next/image'
 import Link from 'next/link'
 import { notFound } from 'next/navigation'
 import { client, urlFor } from '@/lib/sanity'
 import { BROAD_CATEGORIES } from '@/lib/categories'
+import { ProductGallery, type GalleryImage } from '@/components/ProductGallery'
 
 interface Product {
   _id: string
@@ -15,6 +15,7 @@ interface Product {
   description?: string
   specifications?: string
   image?: any
+  gallery?: any[]
   slug: { current: string }
   category: {
     name: string
@@ -34,6 +35,7 @@ async function getProduct(slug: string): Promise<Product | null> {
     description,
     specifications,
     image,
+    gallery,
     slug,
     category->{
       name,
@@ -61,6 +63,15 @@ export default async function ProductPage({
 
   const enquireHref = `/contact?subject=${encodeURIComponent(`Enquiry: ${product.name}`)}`
   const cond = conditionMeta[product.condition]
+
+  // Main image first, then any additional gallery images (skipping empty slots)
+  const images: GalleryImage[] = [product.image, ...(product.gallery ?? [])]
+    .filter(img => img?.asset)
+    .map((img, i) => ({
+      key: img._key ?? `img-${i}`,
+      src: urlFor(img).width(800).height(800).url(),
+      thumb: urlFor(img).width(112).height(112).url(),
+    }))
 
   const categorySlug = product.category?.slug?.current
   const broadCategoryKey = BROAD_CATEGORIES.find(
@@ -92,19 +103,7 @@ export default async function ProductPage({
       <div className="grid grid-cols-[400px_340px_1fr] min-h-[560px]">
 
         {/* Col 1 — Image */}
-        <div className="bg-[var(--cream)] flex items-center justify-center relative border-r border-[var(--border)] sticky top-0 self-start" style={{ height: 'calc(100vh - 120px)', maxHeight: 600 }}>
-          {product.image ? (
-            <Image
-              src={urlFor(product.image).width(800).height(800).url()}
-              alt={product.name}
-              width={800}
-              height={800}
-              className="w-full h-full object-contain p-10"
-              priority
-            />
-          ) : (
-            <span className="font-serif text-[120px] text-[var(--border2)] select-none">◎</span>
-          )}
+        <ProductGallery images={images} alt={product.name}>
           <span className={`absolute top-4 left-4 text-[10px] font-medium px-2.5 py-1 tracking-wider ${
             product.condition === 'new' ? 'bg-[var(--red)] text-white' :
             product.condition === 'demo' ? 'bg-[#5a5a5a] text-white' :
@@ -112,7 +111,7 @@ export default async function ProductPage({
           }`}>
             {conditionLabel[product.condition]}
           </span>
-        </div>
+        </ProductGallery>
 
         {/* Col 2 — Buy panel */}
         <div className="border-r border-[var(--border)] flex flex-col divide-y divide-[var(--border)]">

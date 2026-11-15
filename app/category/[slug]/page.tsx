@@ -17,7 +17,7 @@ async function getProducts() {
     price,
     priceOnRequest,
     description,
-    image,
+    "image": coalesce(image, gallery[0]),
     slug,
     category->{
       name,
