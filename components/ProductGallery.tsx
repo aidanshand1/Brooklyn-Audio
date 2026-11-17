@@ -2,6 +2,7 @@
 
 import { useState, type ReactNode } from 'react'
 import Image from 'next/image'
+import { sanityImageLoader } from '@/lib/sanityImageLoader'
 
 export interface GalleryImage {
   key: string
@@ -29,6 +30,7 @@ export function ProductGallery({ images, alt, children }: ProductGalleryProps) {
         {current ? (
           <Image
             key={current.key}
+            loader={sanityImageLoader}
             src={current.src}
             alt={images.length > 1 ? `${alt} (image ${active + 1} of ${images.length})` : alt}
             width={800}
@@ -57,6 +59,7 @@ export function ProductGallery({ images, alt, children }: ProductGalleryProps) {
               }`}
             >
               <Image
+                loader={sanityImageLoader}
                 src={img.thumb}
                 alt=""
                 width={112}

@@ -5,6 +5,7 @@ import { useSearchParams, useRouter } from 'next/navigation'
 import Image from 'next/image'
 import Link from 'next/link'
 import { urlFor } from '@/lib/sanity'
+import { sanityImageLoader } from '@/lib/sanityImageLoader'
 import { BROAD_CATEGORIES } from '@/lib/categories'
 
 interface Product {
@@ -459,6 +460,7 @@ function ProductCard({ product }: { product: Product }) {
       <div className="bg-[var(--cream)] aspect-square flex items-center justify-center relative overflow-hidden">
         {product.image ? (
           <Image
+            loader={sanityImageLoader}
             src={urlFor(product.image).width(400).height(400).url()}
             alt={product.name}
             width={400}
